@@ -97,6 +97,8 @@
 				text-align: left;
 			}
 		</style>
+		
+		
 	</head>
 
 	<body>
@@ -159,10 +161,14 @@
 				</tr>
 			</table>
             
-            <input type="button" value="Print Div Contents" id="btnPrint" onclick="printDiv('printableArea')" />
 		</div>
+		
+		<input type="text" placeholder="enter block number" id="inputBlock"/>
+        <input type="button" value="Print" id="btnPrint" onclick="printDiv('printableArea')" />
+			
 	</body>
     <script>
+	$("#printableArea").hide();
 let sampleJSON = {
 				"A101":{
 						"name":"A",
@@ -179,24 +185,32 @@ let sampleJSON = {
 			};
 // code here can not use window.carName
 const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('myParam');
-const d = new Date();
 
-document.getElementById("total").innerHTML =  sampleJSON["A101"].amount;
-document.getElementById("referenceNumber").innerHTML = "Reference Number: "+ sampleJSON["A101"].referenceNumber;
-document.getElementById("month").innerHTML = "Month(s): "+ sampleJSON["A101"].months;
 
-document.getElementById("currentDate").innerHTML = d;
 		
 	function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
+	
+	 $("#" + divName).toggle();
+	 
+	 const blockNumber = document.getElementById("inputBlock").value;
+
+const d = new Date();
+
+document.getElementById("total").innerHTML =  sampleJSON[blockNumber].amount;
+document.getElementById("referenceNumber").innerHTML = "Reference Number: "+ sampleJSON[blockNumber].referenceNumber;
+document.getElementById("month").innerHTML = "Month(s): "+ sampleJSON[blockNumber].months;
+
+document.getElementById("currentDate").innerHTML = d;
+
+	
+     /* var printContents = document.getElementById(divName).innerHTML;
      var originalContents = document.body.innerHTML;
 
      document.body.innerHTML = printContents;
 
      window.print();
 
-     document.body.innerHTML = originalContents;
+     document.body.innerHTML = originalContents; */
 }
 </script>
 </html>
